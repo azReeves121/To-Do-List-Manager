@@ -1,10 +1,10 @@
 public class ToDoManager {
-    private User[] users;
+    private Users[] users;
     private int userCount;
     private final int MAX_USERS = 10; // Max limit for simplicity
 
     public ToDoManager() {
-        users = new User[MAX_USERS];
+        users = new Users[MAX_USERS];
         userCount = 0;
     }
 
@@ -17,11 +17,11 @@ public class ToDoManager {
             System.out.println("User already exists!");
             return false;
         }
-        users[userCount++] = new User(name);
+        users[userCount++] = new Users(name);
         return true;
     }
 
-    private User getUser(String name) {
+    private Users getUser(String name) {
         for (int i = 0; i < userCount; i++) {
             if (users[i].getName().equalsIgnoreCase(name)) {
                 return users[i];
@@ -31,7 +31,7 @@ public class ToDoManager {
     }
 
     public boolean addTaskToUser(String userName, String taskDescription) {
-        User user = getUser(userName);
+        Users user = getUser(userName);
         if (user != null) {
             user.addTask(taskDescription);
             return true;
@@ -40,12 +40,12 @@ public class ToDoManager {
     }
 
     public boolean markTaskAsCompleted(String userName, String taskDescription) {
-        User user = getUser(userName);
+        Users user = getUser(userName);
         return user != null && user.markTaskAsCompleted(taskDescription);
     }
 
     public void showUserTasks(String userName) {
-        User user = getUser(userName);
+        Users user = getUser(userName);
         if (user != null) {
             user.showTasks();
         } else {

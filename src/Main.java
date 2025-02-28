@@ -1,17 +1,63 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        ToDoManager manager = new ToDoManager();
+        Scanner scanner = new Scanner(System.in);
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        while (true) {
+            System.out.println("\nTo-Do List Manager");
+            System.out.println("1. Add User");
+            System.out.println("2. Add Task to User");
+            System.out.println("3. Mark Task as Completed");
+            System.out.println("4. Show User Tasks");
+            System.out.println("5. Exit");
+            System.out.print("Enter choice: ");
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter user name: ");
+                    String userName = scanner.nextLine();
+                    manager.addUser(userName);
+                    break;
+
+                case 2:
+                    System.out.print("Enter user name: ");
+                    String userForTask = scanner.nextLine();
+                    System.out.print("Enter task description: ");
+                    String taskDesc = scanner.nextLine();
+                    manager.addTaskToUser(userForTask, taskDesc);
+                    break;
+
+                case 3:
+                    System.out.print("Enter user name: ");
+                    String userForCompletion = scanner.nextLine();
+                    System.out.print("Enter task description to mark completed: ");
+                    String completedTask = scanner.nextLine();
+                    if (manager.markTaskAsCompleted(userForCompletion, completedTask)) {
+                        System.out.println("Task marked as completed.");
+                    } else {
+                        System.out.println("Task not found.");
+                    }
+                    break;
+
+                case 4:
+                    System.out.print("Enter user name: ");
+                    String userToShow = scanner.nextLine();
+                    manager.showUserTasks(userToShow);
+                    break;
+
+                case 5:
+                    System.out.println("Exiting...");
+                    scanner.close();
+                    return;
+
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
         }
     }
 }
